@@ -1,0 +1,104 @@
+@font-face {
+  font-family: 'MaPolice';
+  src: url('Fonts/AlumniSans-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+  font-family: 'MaPolice', sans-serif;
+  font-size: 100px;
+  margin: 0;
+  padding: 0;
+  background: url(Images/background.jpeg) no-repeat center center fixed; 
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+  header {
+    position: relative; /* Nécessaire pour utiliser z-index */
+    z-index: 10; /* Assure que le header reste au-dessus */
+    font-size: 15px;
+    background-color: #DFDFD3;
+    color: #02427A;
+    padding: 10px 0;
+    display: flex;
+    height: 8vh; /* 10 % de la hauteur de la fenêtre */
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+
+  header .icon {
+    display: inline-block;
+    width: 100px; 
+    height: auto; 
+    position: absolute;
+    right: 10px; 
+  }
+  header .home {
+    display: inline-block;
+    position: absolute;
+    margin-left: 5px;
+    cursor: pointer;
+    left: 10px;
+    width: 80px;
+    transition: filter 0.3s ease;
+  }
+    
+  header .home:hover { /* Appliquer l'effet au survol sur l'élément .home */
+    filter: hue-rotate(180deg) saturate(2); /* Applique le changement de teinte */
+  }
+
+  header nav {
+    display: flex;
+    gap: 150px; /* Espacement entre les liens */
+    margin-right: 20px;
+  }
+
+  header nav a {
+    text-decoration: none; /* Supprime le soulignement */
+    color: #02427A; /* Couleur des liens */
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  header nav a:hover {
+  color: #0173D2; /* Couleur au survol */
+  }
+  main {
+    position: relative; /* Nécessaire pour positionner les enfants */
+    z-index: 1; /* Niveau par défaut pour le contenu */
+    padding: 20px;
+    flex: 1; /* Permet au main de prendre tout l'espace disponible entre header et footer */
+    color: #DFDFD3;
+  }
+
+  main .overlay {
+    position: absolute; /* Permet de placer l'overlay par rapport au parent */
+    top: 0;
+    left: 0;
+    width: 65%; /* Largeur de la zone assombrie */
+    height: 100%; /* Prend toute la hauteur */
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+    z-index: -1; /* Place l'overlay derrière le contenu */
+    pointer-events: none; /* Ignore les interactions utilisateur */
+  }
+
+  footer {
+    position: relative;
+    z-index: 10;
+    font-size: 20px;
+    background-color: #333;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    position: fixed; /* Fixe le footer en bas de la page */
+    width: 100%;
+    bottom: 0; /* Positionne le footer en bas de la fenêtre */
+    height: 4vh; /* Permet de modifier dynamiquement sa taille */
+    display: flex; /* Centre verticalement le contenu */
+    align-items: center; /* Centre verticalement le texte */
+    justify-content: center; /* Centre horizontalement le texte */
+  }
+

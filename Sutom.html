@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simpl'Eco - Jeu MOTUS</title>
+  <link rel="stylesheet" href="Sutom.css" />
+  <link rel="shortcut icon" href="Images/logo.png" type="image/x-icon" />
+  <script src="dictionnaire.js"></script>
+  <script src="mots_definitions.js"></script>
+</head>
+<body>
+  <header class="header-reduced">
+    <img src="Images/logo.png" alt="Site Icon" class="icon" />
+    <img class="home" src="Images/maison.png" alt="Logo" onclick="location.href='Accueil.html';" />
+    <nav>
+      <a href="Index.html">SUTOM</a>
+      <a href="Definitions.html">Définitions</a>
+    </nav>
+  </header>
+  <main>
+    <div class="game-container">
+      <h1>Jeu MOTUS</h1>
+      <p id="status">Dictionnaire chargé avec <span id="wordCount"></span> mots.</p>
+      <div class="grid" id="grid"></div>
+      <input type="text" id="input" placeholder="Entrez votre mot" />
+      <button onclick="checkWord()">Valider</button>
+      <button onclick="nextRound()">Mot suivant</button>
+      <p id="message"></p>
+      <p id="wordCounter" class="word-counter"></p>
+      <p id="scoreDisplay" class="score-display"></p>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Mon Site Local</p>
+  </footer>
+  <script>
+    let checkWord;
+    const urlParams = new URLSearchParams(window.location.search);
+    const quiz = urlParams.get('quiz');
+    let motsFile;
+    switch (quiz) {
+      case 'mots': motsFile = 'mots.js'; break;
+      case 'quiz2': motsFile = 'mots2.js'; break;
+      case 'quiz3': motsFile = 'mots3.js'; break;
+      default: motsFile = 'mots.js';
+    }
+
+    const script = document.createElement('script');
+    script.src = motsFile;
+    document.head.appendChild(script);
+
+    script.onload = function () {
+      let wordIndex = 0;
+      let score = 0;
+      let chosenWord = getNextWord();
+      let attempts = 0;
+      const maxAttempts = 5;
+
+      document.getElementById("wordCount").textContent = dictionary.length;
+
+      function getNextWord() {
+        return mots[wordIndex].toLowerCase();
+      }
+
+      function createGrid(word) {
+        const grid = document.getElementById("grid");
+        grid.innerHTML = "";
+        for (let i = 0; i < maxAttempts; i++) {
+          let row = document.createElement("div");
+          row.classList.add("grid-row");
+          for (let j = 0; j < word.length; j++) {
+            let cell = document.createElement("div");
+            cell.classList.add("cell");
+            row.appendChild(cell);
+          }
+          grid.appendChild(row);
+        }
+      }
+
+      function updateWordCounter() {
+        document.getElementById("wordCounter").textContent = (wordIndex + 1) + "/" + mots.length;
+      }
+
+      function updateScoreDisplay() {
+        document.getElementById("scoreDisplay").textContent = "Score : " + score + " / " + mots.length;
+      }
+
+      createGrid(chosenWord);
+      updateWordCounter();
+      updateScoreDisplay();
+
+      checkWord = function () {
+        if (attempts >= maxAttempts) return;
+
+        const input = document.getElementById("input").value.toLowerCase();
+        if (input.length !== chosenWord.length) {
+          document.getElementById("message").textContent = "Le mot doit contenir " + chosenWord.length + " lettres.";
+          return;
+        }
+        if (!dictionary.includes(input)) {
+          document.getElementById("message").textContent = "Le mot n'est pas dans le dictionnaire.";
+          return;
+        }
+
+        const grid = document.getElementById("grid");
+        const currentRow = grid.children[attempts];
+        for (let i = 0; i < chosenWord.length; i++) {
+          const cell = currentRow.children[i];
+          cell.textContent = input[i] || "";
+          if (input[i] === chosenWord[i]) {
+            cell.classList.add("correct");
+          } else if (chosenWord.includes(input[i])) {
+            cell.classList.add("present");
+          }
+        }
+
+        attempts++;
+
+        if (input === chosenWord || attempts >= maxAttempts) {
+          const msg = input === chosenWord
+            ? "Bravo, vous avez trouvé le mot !"
+            : "Nombre de tentatives épuisé ! Le mot était : " + chosenWord;
+
+          document.getElementById("message").textContent = msg;
+
+          if (input === chosenWord) {
+            score++;
+            updateScoreDisplay();
+          }
+
+          // Afficher la définition
+          const gridContainer = document.getElementById("grid");
+          gridContainer.innerHTML = "";
+
+          const definitionPara = document.createElement("p");
+          definitionPara.style.marginTop = "20px";
+          definitionPara.style.fontWeight = "bold";
+          definitionPara.style.fontSize = "18px";
+          definitionPara.textContent = "Définition : " + (definitions[chosenWord] || "Définition non trouvée.");
+          gridContainer.appendChild(definitionPara);
+        }
+
+        document.getElementById("input").value = "";
+      };
+
+      function nextRound() {
+        wordIndex++;
+
+        if (wordIndex >= mots.length) {
+          document.getElementById("message").textContent =
+            "Quiz terminé ! Votre score final est : " + score + " / " + mots.length + ". Retour au menu...";
+          document.getElementById("input").disabled = true;
+
+          // Redirection après 3 secondes
+          setTimeout(() => {
+            window.location.href = "Index.html";
+          }, 3000);
+          return;
+        }
+
+        chosenWord = getNextWord();
+        attempts = 0;
+        document.getElementById("message").textContent = "";
+        document.getElementById("input").value = "";
+        document.getElementById("input").disabled = false;
+        createGrid(chosenWord);
+        updateWordCounter();
+        updateScoreDisplay();
+      }
+
+
+      window.nextRound = nextRound;
+    };
+  </script>
+</body>
+</html>
