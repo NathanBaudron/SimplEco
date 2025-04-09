@@ -1,8 +1,8 @@
 // mots.js - Liste des mots à trouver
 const mots = [
-    "marché", "inflation", "crédit", "action", "dette", "pib", "budget", 
-    "entreprise", "retraite", "assurance", "chômage", "prime", "mutuelle", 
-    "devise", "plainte", "testament", "crise", "bénéfice", "comptabilité", 
+    "marche", "inflation", "credit", "action", "dette", "pib", "budget", 
+    "entreprise", "retraite", "assurance", "chomage", "prime", "mutuelle", 
+    "devise", "plainte", "testament", "crise", "benefice", "comptabilite", 
     "caution"
 ];
 
