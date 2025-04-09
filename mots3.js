@@ -1,9 +1,9 @@
 // mots.js - Liste des mots à trouver
 const mots = [
-    "oligopsone", "oligopole", "batx", "amortissement", "liquidité", "créance", 
-    "monopole", "liquidation", "faillite", "sénat", "cac40", "gafam", 
-    "cryptomonnaie", "quotient", "acompte", "intérêt", "capitalisme", 
-    "communisme","soutenabilité","modèle"
+    "oligopsone", "oligopole", "batx", "amortissement", "liquidite", "creance", 
+    "monopole", "liquidation", "faillite", "senat", "cac40", "gafam", 
+    "cryptomonnaie", "quotient", "acompte", "interet", "capitalisme", 
+    "communisme","soutenabilite","modele"
 ];
 
 let currentWordIndex = 0;
