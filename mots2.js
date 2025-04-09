@@ -1,9 +1,9 @@
 // mots.js - Liste des mots à trouver
 const mots = [
-    "libéral", "deflation", "krach", "allocations", "fiscalité", "imposition", 
+    "liberal", "deflation", "krach", "allocations", "fiscalite", "imposition", 
     "investissement", "concurrence", "dividende", "rendement", "bourse", 
-    "fusion", "acquisition", "filiale", "rtt", "héritage", "quotas", 
-    "hypothèque", "microentreprise", "assurance-vie"
+    "fusion", "acquisition", "filiale", "rtt", "heritage", "quotas", 
+    "hypotheque", "microentreprise", "assurance-vie"
 ];
 
 let currentWordIndex = 0;
