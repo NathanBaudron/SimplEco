@@ -5,7 +5,7 @@ const definitions = {
     "inflation": "L'inflation est l'augmentation générale et continue des prix des biens et services dans une économie, réduisant ainsi le pouvoir d'achat.",
     "credit": "Le crédit est un prêt accordé par une institution financière ou un prêteur à un emprunteur, qui s'engage à rembourser avec des intérêts selon des conditions fixées.",
     "action": "Une action est une part de propriété dans une entreprise, qui donne à son détenteur un droit sur une partie des bénéfices (dividendes) et éventuellement un droit de vote lors des assemblées générales.",
-    "liberal": "Un libéral, en économie, est une personne qui prône la liberté des marchés, une intervention limitée de l'État et la libre concurrence pour favoriser la croissance et l'efficacité économique.",
+    "liberalisme": "Système économique dans lequel les agents économiques (entreprises, individus) ont la liberté de vendre et d'acheter des biens, des services et des capitaux. Une économie de marché s'oppose à une économie planifiée dans laquelle toutes les grandes décisions sont prises par l'État.",
     "deflation": "La déflation est une baisse généralisée et prolongée des prix des biens et services, souvent liée à une contraction de la demande, qui peut entraîner une récession économique.",
     "krach": "Un krach est une chute brutale et soudaine des prix sur un marché financier, souvent causée par une panique des investisseurs, et pouvant entraîner une crise économique.",
     "allocations": "Les allocations sont des sommes d'argent versées par l'État ou d'autres organismes pour soutenir des individus ou des groupes, généralement pour des besoins spécifiques tels que l'aide sociale, le logement ou la famille.",
