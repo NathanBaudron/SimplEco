@@ -12,9 +12,9 @@
 <body>
   <header class="header-reduced">
     <img src="Images/logo.png" alt="Site Icon" class="icon" />
-    <img class="home" src="Images/maison.png" alt="Logo" onclick="location.href='index.html';" />
+    <img class="home" src="Images/maison.png" alt="Logo" onclick="location.href='Accueil.html';" />
     <nav>
-      <a href="quiz.html">SUTOM</a>
+      <a href="Index.html">SUTOM</a>
       <a href="Definitions.html">Définitions</a>
     </nav>
   </header>
@@ -105,13 +105,34 @@
 
         const grid = document.getElementById("grid");
         const currentRow = grid.children[attempts];
+
+        // D'abord, on compte les lettres du mot à deviner
+        let letterCount = {};
+        for (let i = 0; i < chosenWord.length; i++) {
+          const letter = chosenWord[i];
+          letterCount[letter] = (letterCount[letter] || 0) + 1;
+        }
+
+        // Première passe : marquer les lettres correctes (vert)
         for (let i = 0; i < chosenWord.length; i++) {
           const cell = currentRow.children[i];
-          cell.textContent = input[i] || "";
-          if (input[i] === chosenWord[i]) {
+          const letter = input[i];
+          cell.textContent = letter;
+
+          if (letter === chosenWord[i]) {
             cell.classList.add("correct");
-          } else if (chosenWord.includes(input[i])) {
+            letterCount[letter]--;
+          }
+        }
+
+        // Deuxième passe : marquer les lettres présentes (jaune)
+        for (let i = 0; i < chosenWord.length; i++) {
+          const cell = currentRow.children[i];
+          const letter = input[i];
+
+          if (!cell.classList.contains("correct") && letterCount[letter] > 0) {
             cell.classList.add("present");
+            letterCount[letter]--;
           }
         }
 
@@ -144,6 +165,7 @@
         document.getElementById("input").value = "";
       };
 
+
       function nextRound() {
         wordIndex++;
 
@@ -154,7 +176,7 @@
 
           // Redirection après 3 secondes
           setTimeout(() => {
-            window.location.href = "quiz.html";
+            window.location.href = "Index.html";
           }, 3000);
           return;
         }
